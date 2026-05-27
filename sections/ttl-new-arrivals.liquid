@@ -7,7 +7,7 @@
   assign products_to_show = section.settings.products_to_show
 -%}
 
-<section class="section">
+<section class="section ttl-pattern-jaali">
   <div class="page-width">
     <div class="section-heading">
       <div>
@@ -20,6 +20,7 @@
         <p>{{ section.settings.text }}</p>
       {%- endif -%}
     </div>
+    <span class="ttl-paisley-divider" aria-hidden="true"></span>
 
     <div class="product-grid">
       {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
