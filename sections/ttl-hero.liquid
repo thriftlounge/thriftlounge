@@ -13,7 +13,14 @@
           alt: hero_image.alt
       }}
     {%- else -%}
-      {{ 'lifestyle-1' | placeholder_svg_tag }}
+      <img
+        src="{{ 'ttl-hero-boutique.png' | asset_url }}"
+        alt="The Thrift Lounge boutique hero"
+        loading="eager"
+        fetchpriority="high"
+        width="2400"
+        height="1350"
+      >
     {%- endif -%}
   </div>
 

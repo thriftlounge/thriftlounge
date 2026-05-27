@@ -28,12 +28,42 @@
           {% render 'ttl-product-card', product_card_product: product, show_vendor: section.settings.show_vendor %}
         {%- endfor -%}
       {%- else -%}
-        {%- for i in (1..4) -%}
+        {%- for i in (1..6) -%}
+          {%- liquid
+            assign fallback_image = 'ttl-product-palazzo.png'
+            assign fallback_title = 'Crinkled Palazzo Set'
+            assign fallback_price = '₹1,299'
+            case i
+              when 2
+                assign fallback_image = 'ttl-product-lace-dress.png'
+                assign fallback_title = 'Lace Wrap Dress'
+                assign fallback_price = '₹1,199'
+              when 3
+                assign fallback_image = 'ttl-product-maxi-skirt.png'
+                assign fallback_title = 'Flowy Maxi Skirt'
+                assign fallback_price = '₹999'
+              when 4
+                assign fallback_image = 'ttl-product-boho-skirt.png'
+                assign fallback_title = 'Boho Flared Skirt'
+                assign fallback_price = '₹1,199'
+              when 5
+                assign fallback_image = 'ttl-product-jeans.png'
+                assign fallback_title = 'Studded Flared Jeans'
+                assign fallback_price = '₹1,399'
+              when 6
+                assign fallback_image = 'ttl-product-jacket.png'
+                assign fallback_title = 'Embroidered Long Jacket'
+                assign fallback_price = '₹1,299'
+            endcase
+          -%}
           <article class="product-card">
-            <div class="product-card__media">{{ 'product-' | append: i | placeholder_svg_tag: 'product-card__placeholder' }}</div>
+            <div class="product-card__media">
+              <img src="{{ fallback_image | asset_url }}" alt="{{ fallback_title }}" loading="lazy">
+              <span class="product-card__wishlist" aria-label="Wishlist">{% render 'ttl-icon', icon: 'heart' %}</span>
+            </div>
             <div class="product-card__info">
-              <h3 class="product-card__title">Add products to this collection</h3>
-              <span class="price">{{ 0 | money }}</span>
+              <h3 class="product-card__title">{{ fallback_title }}</h3>
+              <span class="price">{{ fallback_price }}</span>
             </div>
           </article>
         {%- endfor -%}

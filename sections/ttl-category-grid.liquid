@@ -27,21 +27,36 @@
 
       {%- if has_theme_categories -%}
         {%- assign collection = settings.category_collection_1 -%}
-        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection, fallback_image: 'ttl-category-dresses.png' %}{%- endif -%}
         {%- assign collection = settings.category_collection_2 -%}
-        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection, fallback_image: 'ttl-category-tops.png' %}{%- endif -%}
         {%- assign collection = settings.category_collection_3 -%}
-        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection, fallback_image: 'ttl-category-bottoms.png' %}{%- endif -%}
         {%- assign collection = settings.category_collection_4 -%}
-        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection, fallback_image: 'ttl-category-coords.png' %}{%- endif -%}
         {%- assign collection = settings.category_collection_5 -%}
-        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection, fallback_image: 'ttl-category-ethnic.png' %}{%- endif -%}
         {%- assign collection = settings.category_collection_6 -%}
-        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection, fallback_image: 'ttl-category-sale.png' %}{%- endif -%}
       {%- else -%}
         {%- for block in section.blocks -%}
           {%- assign collection = block.settings.collection -%}
-          {% render 'ttl-collection-card', collection: collection, fallback_title: block.settings.fallback_title, block: block %}
+          {%- liquid
+            assign fallback_image = 'ttl-category-dresses.png'
+            case forloop.index
+              when 2
+                assign fallback_image = 'ttl-category-tops.png'
+              when 3
+                assign fallback_image = 'ttl-category-bottoms.png'
+              when 4
+                assign fallback_image = 'ttl-category-coords.png'
+              when 5
+                assign fallback_image = 'ttl-category-ethnic.png'
+              when 6
+                assign fallback_image = 'ttl-category-sale.png'
+            endcase
+          -%}
+          {% render 'ttl-collection-card', collection: collection, fallback_title: block.settings.fallback_title, fallback_image: fallback_image, block: block %}
         {%- endfor -%}
       {%- endif -%}
     </div>
