@@ -1,0 +1,83 @@
+<section class="section">
+  <div class="page-width">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">{{ collection.products_count }} pieces</p>
+        <h1>{{ collection.title }}</h1>
+      </div>
+      {%- if collection.description != blank -%}
+        <div class="rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+      <form class="facets" id="FacetFiltersForm">
+        {%- if section.settings.enable_filtering -%}
+          {%- for filter in collection.filters -%}
+            <details>
+              <summary class="button button--secondary">{{ filter.label }}</summary>
+              <div>
+                {%- case filter.type -%}
+                  {%- when 'price_range' -%}
+                    <label>
+                      Min
+                      <input class="field" name="{{ filter.min_value.param_name }}" type="number" min="0" {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}>
+                    </label>
+                    <label>
+                      Max
+                      <input class="field" name="{{ filter.max_value.param_name }}" type="number" min="0" {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}>
+                    </label>
+                  {%- else -%}
+                    {%- for value in filter.values -%}
+                      <label>
+                        <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                        {{ value.label }} ({{ value.count }})
+                      </label>
+                    {%- endfor -%}
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if section.settings.enable_sorting -%}
+          <select class="select" name="sort_by" aria-label="Sort by" onchange="this.form.submit()">
+            {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+            {%- endfor -%}
+          </select>
+        {%- endif -%}
+        <button class="button button--secondary" type="submit">Apply</button>
+      </form>
+    {%- endif -%}
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if collection.products.size == 0 -%}
+        <div class="empty-state">
+          <h2>No pieces found</h2>
+          <p>Try a different filter or check back after the next drop.</p>
+        </div>
+      {%- else -%}
+        <div class="product-grid">
+          {%- for product in collection.products -%}
+            {% render 'ttl-product-card', product_card_product: product, show_vendor: section.settings.show_vendor %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 16 },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "checkbox", "id": "enable_filtering", "label": "Enable filtering", "default": true },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true }
+  ]
+}
+{% endschema %}

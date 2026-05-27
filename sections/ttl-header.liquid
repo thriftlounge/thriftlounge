@@ -1,0 +1,84 @@
+<lounge-header class="site-header">
+  <div class="page-width site-header__inner">
+    <button class="icon-button menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="MobileNav" aria-label="{{ 'general.menu' | t }}">
+      {% render 'ttl-icon', icon: 'menu' %}
+    </button>
+
+    <nav class="site-header__nav" aria-label="Main menu">
+      {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+        {%- for link in section.settings.menu.links limit: 4 -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ section.settings.new_drops_link }}">New Drops</a>
+        <a href="{{ routes.collections_url }}">Collections</a>
+      {%- endif -%}
+    </nav>
+
+    <a class="site-logo" href="{{ routes.root_url }}">
+      <span class="site-logo__text">{{ section.settings.logo_text }}</span>
+      <span class="site-logo__tagline">{{ section.settings.tagline }}</span>
+    </a>
+
+    <div class="site-header__actions">
+      <a class="icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
+        {% render 'ttl-icon', icon: 'search' %}
+      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {% render 'ttl-icon', icon: 'user' %}
+        </a>
+      {%- endif -%}
+      <a class="icon-button" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}">
+        {% render 'ttl-icon', icon: 'cart' %}
+        <span class="visually-hidden">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav id="MobileNav" class="mobile-nav" data-mobile-nav hidden aria-label="Mobile menu">
+    {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      <a href="{{ section.settings.new_drops_link }}">New Drops</a>
+      <a href="{{ routes.collections_url }}">Collections</a>
+    {%- endif -%}
+  </nav>
+</lounge-header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "THE THRIFT LOUNGE"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Curated finds. New stories."
+    },
+    {
+      "type": "url",
+      "id": "new_drops_link",
+      "label": "New Drops fallback link"
+    }
+  ]
+}
+{% endschema %}

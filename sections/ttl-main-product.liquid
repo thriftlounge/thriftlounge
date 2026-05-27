@@ -1,0 +1,140 @@
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign condition = product.metafields.custom.condition
+  assign measurements = product.metafields.custom.measurements
+  assign fabric_material = product.metafields.custom.fabric_material
+  assign styling_note = product.metafields.custom.styling_note
+-%}
+
+<section class="section">
+  <div class="page-width product-page">
+    <div class="product-gallery">
+      {%- if product.media.size > 0 -%}
+        {%- for media in product.media -%}
+          <div class="product-gallery__item">
+            {{
+              media.preview_image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 55vw, 100vw',
+                widths: '500, 800, 1100, 1400',
+                alt: media.alt
+            }}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="product-gallery__item">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="product-info">
+      <p class="eyebrow">{{ product.type | default: product.vendor }}</p>
+      <h1>{{ product.title }}</h1>
+      {% render 'ttl-price', product: product %}
+
+      {%- unless selected_variant.available -%}
+        <span class="badge product-status">{{ 'products.product.sold_out' | t }}</span>
+      {%- endunless -%}
+
+      <div class="product-metafields">
+        {%- if condition != blank -%}
+          <p><strong>Condition:</strong> {{ condition | metafield_tag }}</p>
+        {%- endif -%}
+        {%- if measurements != blank -%}
+          <p><strong>Measurements:</strong> {{ measurements | metafield_tag }}</p>
+        {%- endif -%}
+        {%- if fabric_material != blank -%}
+          <p><strong>Fabric/Material:</strong> {{ fabric_material | metafield_tag }}</p>
+        {%- endif -%}
+        {%- if styling_note != blank -%}
+          <p><strong>Styling Note:</strong> {{ styling_note | metafield_tag }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- form 'product', product, class: 'product-form' -%}
+        <input type="hidden" name="id" value="{{ selected_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          <variant-picker class="variant-picker">
+            {%- for option in product.options_with_values -%}
+              <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+              <select class="select" id="Option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                    {{ value }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            {%- endfor -%}
+            <script type="application/json">{{ product.variants | json }}</script>
+          </variant-picker>
+        {%- endunless -%}
+
+        <div class="quantity">
+          <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+          <input id="Quantity-{{ section.id }}" class="field" type="number" name="quantity" value="1" min="1">
+        </div>
+
+        <button class="button" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>
+          <span data-submit-text>
+            {%- if selected_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </span>
+        </button>
+
+        {{ form | payment_button }}
+      {%- endform -%}
+
+      {%- if settings.whatsapp_url != blank -%}
+        <a class="button button--secondary" href="{{ settings.whatsapp_url }}?text={{ 'I want to enquire about ' | append: product.title | append: ' - ' | append: shop.url | append: product.url | url_encode }}" target="_blank" rel="noopener">
+          WhatsApp Enquiry
+        </a>
+      {%- endif -%}
+
+      <details class="product-accordion" data-accordion open>
+        <summary>Product Details</summary>
+        <div class="product-accordion__content rte">
+          {{ product.description }}
+          {%- if condition != blank -%}<p><strong>Condition:</strong> {{ condition | metafield_tag }}</p>{%- endif -%}
+          {%- if fabric_material != blank -%}<p><strong>Fabric/Material:</strong> {{ fabric_material | metafield_tag }}</p>{%- endif -%}
+        </div>
+      </details>
+
+      <details class="product-accordion" data-accordion>
+        <summary>Size & Fit</summary>
+        <div class="product-accordion__content rte">
+          {%- if measurements != blank -%}
+            {{ measurements | metafield_tag }}
+          {%- else -%}
+            {{ section.settings.size_fit_text }}
+          {%- endif -%}
+        </div>
+      </details>
+
+      <details class="product-accordion" data-accordion>
+        <summary>Shipping & Returns</summary>
+        <div class="product-accordion__content rte">{{ section.settings.shipping_returns_text }}</div>
+      </details>
+
+      <details class="product-accordion" data-accordion>
+        <summary>Care Guide</summary>
+        <div class="product-accordion__content rte">{{ section.settings.care_guide_text }}</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    { "type": "richtext", "id": "size_fit_text", "label": "Fallback size and fit text", "default": "<p>Check listed measurements against a piece you love for the best fit.</p>" },
+    { "type": "richtext", "id": "shipping_returns_text", "label": "Shipping and returns text", "default": "<p>Orders are packed with care. Final shipping and return policies are managed in Shopify.</p>" },
+    { "type": "richtext", "id": "care_guide_text", "label": "Care guide text", "default": "<p>Gently hand wash or dry clean delicate thrift pieces to preserve their story.</p>" }
+  ]
+}
+{% endschema %}

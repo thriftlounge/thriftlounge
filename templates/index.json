@@ -1,7 +1,7 @@
 {
   "sections": {
     "hero": {
-      "type": "hero",
+      "type": "ttl-hero",
       "settings": {
         "heading": "TIMELESS PIECES,\nYOUR STORY.",
         "text": "Handpicked styles that blend comfort, charm & effortless elegance.",
@@ -9,7 +9,7 @@
       }
     },
     "trust_bar": {
-      "type": "trust-bar",
+      "type": "ttl-trust-bar",
       "blocks": {
         "trust_1": { "type": "trust_item", "settings": { "icon": "sparkle", "title": "Curated Styles" } },
         "trust_2": { "type": "trust_item", "settings": { "icon": "leaf", "title": "Sustainable Fashion" } },
@@ -19,8 +19,8 @@
       "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
       "settings": {}
     },
-    "collections": {
-      "type": "collection-list",
+    "categories": {
+      "type": "ttl-category-grid",
       "blocks": {
         "collection_1": { "type": "featured_collection" },
         "collection_2": { "type": "featured_collection" },
@@ -32,28 +32,14 @@
       "block_order": ["collection_1", "collection_2", "collection_3", "collection_4", "collection_5", "collection_6"],
       "settings": {}
     },
-    "arrivals": {
-      "type": "featured-collection",
+    "new_arrivals": {
+      "type": "ttl-new-arrivals",
       "settings": {
         "eyebrow": "Just landed",
         "heading": "New Arrivals",
         "products_to_show": 6
       }
-    },
-    "story": {
-      "type": "rich-text",
-      "settings": {
-        "heading": "Secondhand style, selected with care."
-      }
-    },
-    "banner": {
-      "type": "image-banner",
-      "settings": {}
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {}
     }
   },
-  "order": ["hero", "trust_bar", "collections", "arrivals", "story", "banner", "newsletter"]
+  "order": ["hero", "trust_bar", "categories", "new_arrivals"]
 }

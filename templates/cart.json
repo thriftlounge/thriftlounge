@@ -1,15 +1,9 @@
 {
   "sections": {
     "main": {
-      "type": "main-cart",
+      "type": "ttl-cart",
       "settings": {}
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "Catch the next drop before it sells."
-      }
     }
   },
-  "order": ["main", "newsletter"]
+  "order": ["main"]
 }

@@ -1,0 +1,62 @@
+{%- liquid
+  assign featured_collection = section.settings.collection
+  assign products_to_show = section.settings.products_to_show
+-%}
+
+<section class="section">
+  <div class="page-width">
+    <div class="section-heading">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      {%- if section.settings.text != blank -%}
+        <p>{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid">
+      {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+        {%- for product in featured_collection.products limit: products_to_show -%}
+          {% render 'ttl-product-card', product_card_product: product, show_vendor: section.settings.show_vendor %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <article class="product-card">
+            <div class="product-card__media">{{ 'product-' | append: i | placeholder_svg_tag: 'product-card__placeholder' }}</div>
+            <div class="product-card__info">
+              <h3 class="product-card__title">Add products to this collection</h3>
+              <span class="price">{{ 0 | money }}</span>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.button_label != blank and featured_collection != blank -%}
+      <p style="margin-top: 30px;">
+        <a class="button button--secondary" href="{{ featured_collection.url }}">{{ section.settings.button_label }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Just landed" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "New Arrivals" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Select the New Arrivals collection to pull products dynamically from Shopify." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 6 },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "View the edit" }
+  ],
+  "presets": [
+    { "name": "Featured collection" }
+  ]
+}
+{% endschema %}

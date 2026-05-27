@@ -1,17 +1,9 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "ttl-main-product",
       "settings": {}
-    },
-    "related": {
-      "type": "related-products",
-      "settings": {
-        "eyebrow": "Keep browsing",
-        "heading": "More from the lounge",
-        "products_to_show": 4
-      }
     }
   },
-  "order": ["main", "related"]
+  "order": ["main"]
 }

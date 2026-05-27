@@ -1,0 +1,57 @@
+<section class="hero">
+  <div class="hero__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '100vw',
+          widths: '900, 1200, 1600, 2000, 2400',
+          alt: section.settings.image.alt
+      }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </div>
+
+  <div class="page-width">
+    <div class="hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1>{{ section.settings.heading | newline_to_br }}</h1>
+      {%- if section.settings.text != blank -%}
+        <p>{{ section.settings.text }}</p>
+      {%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.primary_label != blank -%}
+          <a class="button" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank -%}
+          <a class="button button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Curated thrift boutique" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "TIMELESS PIECES,\nYOUR STORY." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Handpicked styles that blend comfort, charm & effortless elegance." },
+    { "type": "text", "id": "primary_label", "label": "Primary button", "default": "Shop New Drops" },
+    { "type": "url", "id": "primary_link", "label": "Primary link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary link" }
+  ],
+  "presets": [
+    { "name": "Hero" }
+  ]
+}
+{% endschema %}
