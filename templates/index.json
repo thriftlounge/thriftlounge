@@ -3,11 +3,21 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "heading": "The Thrift Lounge",
-        "text": "Curated women’s clothing with a warm boutique feel, refreshed with one-of-one finds from Shopify inventory.",
-        "primary_label": "Shop new arrivals",
-        "secondary_label": "Browse collections"
+        "heading": "TIMELESS PIECES,\nYOUR STORY.",
+        "text": "Handpicked styles that blend comfort, charm & effortless elegance.",
+        "primary_label": "Shop New Drops"
       }
+    },
+    "trust_bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "trust_1": { "type": "trust_item", "settings": { "icon": "sparkle", "title": "Curated Styles" } },
+        "trust_2": { "type": "trust_item", "settings": { "icon": "leaf", "title": "Sustainable Fashion" } },
+        "trust_3": { "type": "trust_item", "settings": { "icon": "quality", "title": "Quality Pieces" } },
+        "trust_4": { "type": "trust_item", "settings": { "icon": "bag", "title": "Easy Shopping" } }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "settings": {}
     },
     "collections": {
       "type": "collection-list",
@@ -15,16 +25,19 @@
         "collection_1": { "type": "featured_collection" },
         "collection_2": { "type": "featured_collection" },
         "collection_3": { "type": "featured_collection" },
-        "collection_4": { "type": "featured_collection" }
+        "collection_4": { "type": "featured_collection" },
+        "collection_5": { "type": "featured_collection" },
+        "collection_6": { "type": "featured_collection" }
       },
-      "block_order": ["collection_1", "collection_2", "collection_3", "collection_4"],
+      "block_order": ["collection_1", "collection_2", "collection_3", "collection_4", "collection_5", "collection_6"],
       "settings": {}
     },
     "arrivals": {
       "type": "featured-collection",
       "settings": {
-        "heading": "Fresh from the racks",
-        "products_to_show": 8
+        "eyebrow": "Just landed",
+        "heading": "New Arrivals",
+        "products_to_show": 6
       }
     },
     "story": {
@@ -42,5 +55,5 @@
       "settings": {}
     }
   },
-  "order": ["hero", "collections", "arrivals", "story", "banner", "newsletter"]
+  "order": ["hero", "trust_bar", "collections", "arrivals", "story", "banner", "newsletter"]
 }

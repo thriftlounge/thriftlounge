@@ -17,12 +17,24 @@
             <details>
               <summary class="button button--secondary">{{ filter.label }}</summary>
               <div>
-                {%- for value in filter.values -%}
-                  <label>
-                    <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
-                    {{ value.label }} ({{ value.count }})
-                  </label>
-                {%- endfor -%}
+                {%- case filter.type -%}
+                  {%- when 'price_range' -%}
+                    <label>
+                      Min
+                      <input class="field" name="{{ filter.min_value.param_name }}" type="number" min="0" {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}>
+                    </label>
+                    <label>
+                      Max
+                      <input class="field" name="{{ filter.max_value.param_name }}" type="number" min="0" {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}>
+                    </label>
+                  {%- else -%}
+                    {%- for value in filter.values -%}
+                      <label>
+                        <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                        {{ value.label }} ({{ value.count }})
+                      </label>
+                    {%- endfor -%}
+                {%- endcase -%}
               </div>
             </details>
           {%- endfor -%}

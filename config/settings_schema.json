@@ -90,5 +90,20 @@
         "default": "assistant_n4"
       }
     ]
+  },
+  {
+    "name": "Social links",
+    "settings": [
+      {
+        "type": "url",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "whatsapp_url",
+        "label": "WhatsApp URL"
+      }
+    ]
   }
 ]

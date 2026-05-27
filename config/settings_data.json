@@ -6,6 +6,8 @@
     "color_muted": "#746052",
     "color_accent": "#8a563d",
     "color_accent_dark": "#4b3125",
-    "logo_width": 160
+    "logo_width": 160,
+    "instagram_url": "https://www.instagram.com/",
+    "whatsapp_url": "https://wa.me/"
   }
 }

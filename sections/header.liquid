@@ -5,25 +5,21 @@
     </button>
 
     <nav class="site-header__nav" aria-label="Main menu">
-      {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
+      {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+        {%- for link in section.settings.menu.links limit: 4 -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ section.settings.new_drops_link }}">New Drops</a>
+        <a href="{{ routes.collections_url }}">Collections</a>
+      {%- endif -%}
     </nav>
 
-    <a class="site-logo" href="{{ routes.root_url }}" style="--logo-width: {{ settings.logo_width }}px">
-      {%- if settings.logo != blank -%}
-        {{
-          settings.logo
-          | image_url: width: settings.logo_width
-          | image_tag:
-            loading: 'eager',
-            widths: '100, 140, 180, 220, 260',
-            style: 'width: var(--logo-width); height: auto;',
-            alt: shop.name
-        }}
-      {%- else -%}
-        <span class="site-logo__text">{{ shop.name }}</span>
-      {%- endif -%}
+    <a class="site-logo" href="{{ routes.root_url }}">
+      <span class="site-logo__text">{{ section.settings.logo_text }}</span>
+      <span class="site-logo__tagline">{{ section.settings.tagline }}</span>
     </a>
 
     <div class="site-header__actions">
@@ -43,9 +39,16 @@
   </div>
 
   <nav id="MobileNav" class="mobile-nav" data-mobile-nav hidden aria-label="Mobile menu">
-    {%- for link in section.settings.menu.links -%}
-      <a href="{{ link.url }}">{{ link.title }}</a>
-    {%- endfor -%}
+    {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      <a href="{{ section.settings.new_drops_link }}">New Drops</a>
+      <a href="{{ routes.collections_url }}">Collections</a>
+    {%- endif -%}
   </nav>
 </lounge-header>
 
@@ -58,6 +61,23 @@
       "id": "menu",
       "label": "Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "THE THRIFT LOUNGE"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Curated finds. New stories."
+    },
+    {
+      "type": "url",
+      "id": "new_drops_link",
+      "label": "New Drops fallback link"
     }
   ]
 }

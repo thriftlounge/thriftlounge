@@ -5,6 +5,14 @@
       {%- if section.settings.text != blank -%}
         <p>{{ section.settings.text }}</p>
       {%- endif -%}
+      <div class="footer-social">
+        {%- if settings.instagram_url != blank -%}
+          <a href="{{ settings.instagram_url }}" aria-label="Instagram">{% render 'icon', icon: 'instagram' %} Instagram</a>
+        {%- endif -%}
+        {%- if settings.whatsapp_url != blank -%}
+          <a href="{{ settings.whatsapp_url }}" aria-label="WhatsApp">{% render 'icon', icon: 'whatsapp' %} WhatsApp</a>
+        {%- endif -%}
+      </div>
     </div>
 
     {%- for block in section.blocks -%}
@@ -19,6 +27,26 @@
         {%- endif -%}
       </div>
     {%- endfor -%}
+
+    <div>
+      <h3>Policies</h3>
+      <nav class="footer-menu" aria-label="Policies">
+        {%- for policy in shop.policies -%}
+          {%- if policy != blank -%}
+            <a href="{{ policy.url }}">{{ policy.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <div>
+      <h3>{{ section.settings.newsletter_heading }}</h3>
+      {%- form 'customer' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input class="field" type="email" name="contact[email]" value="{{ form.email }}" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="Email address" required>
+        <button class="button" type="submit">Join</button>
+      {%- endform -%}
+    </div>
   </div>
 </footer>
 
@@ -37,6 +65,12 @@
       "id": "text",
       "label": "Text",
       "default": "A warm boutique edit of women’s thrift, vintage, and pre-loved style."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Join the lounge list"
     }
   ],
   "blocks": [

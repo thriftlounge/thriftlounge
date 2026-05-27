@@ -24,6 +24,9 @@
     {%- elsif product_card_product.compare_at_price > product_card_product.price -%}
       <span class="badge product-card__badge">{{ 'products.product.sale' | t }}</span>
     {%- endif -%}
+    <span class="product-card__wishlist" aria-label="Wishlist">
+      {% render 'icon', icon: 'heart' %}
+    </span>
   </a>
 
   <div class="product-card__info">

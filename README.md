@@ -32,3 +32,15 @@ Create collections such as:
 - Evening
 
 Use Shopify inventory tracking for thrift stock so sold-out badges reflect actual availability.
+
+## Required Dynamic Setup
+
+- Assign the “New Arrivals” Shopify collection to the New Arrivals section in the theme editor.
+- Assign six category collections to the Shop by Category section.
+- Configure Shopify Search & Discovery filters for size, price, availability, and product type.
+- Add product metafields under the `custom` namespace:
+  - `condition`
+  - `measurements`
+  - `fabric_material`
+  - `styling_note`
+- Add Instagram and WhatsApp links in Theme settings > Social links.

@@ -1,6 +1,22 @@
-{%- if section.settings.text != blank -%}
+{%- if section.settings.show_announcement -%}
   <div class="announcement" role="region" aria-label="Announcement">
-    {{ section.settings.text }}
+    <div class="page-width announcement__inner">
+      <span>{{ section.settings.location_text }}</span>
+      <span>{{ section.settings.shipping_text }}</span>
+      <span class="announcement__social">
+        {{ section.settings.follow_text }}
+        {%- if settings.instagram_url != blank -%}
+          <a href="{{ settings.instagram_url }}" aria-label="Instagram">
+            {% render 'icon', icon: 'instagram' %}
+          </a>
+        {%- endif -%}
+        {%- if settings.whatsapp_url != blank -%}
+          <a href="{{ settings.whatsapp_url }}" aria-label="WhatsApp">
+            {% render 'icon', icon: 'whatsapp' %}
+          </a>
+        {%- endif -%}
+      </span>
+    </div>
   </div>
 {%- endif -%}
 
@@ -9,10 +25,28 @@
   "name": "Announcement bar",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
       "type": "text",
-      "id": "text",
-      "label": "Text",
-      "default": "Curated secondhand pieces, new drops weekly."
+      "id": "location_text",
+      "label": "Left text",
+      "default": "Mumbai, India"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Center text",
+      "default": "Free shipping on orders above ₹1499"
+    },
+    {
+      "type": "text",
+      "id": "follow_text",
+      "label": "Right text",
+      "default": "Follow us"
     }
   ]
 }
