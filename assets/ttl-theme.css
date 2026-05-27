@@ -1015,3 +1015,375 @@ p {
     display: grid;
   }
 }
+
+/* Mockup alignment: clean Indian boutique, image-led and restrained. */
+body::before,
+.ttl-pattern-blockprint::before,
+.ttl-pattern-jaali::before,
+.ttl-pattern-paisley::before {
+  display: none;
+}
+
+.ttl-paisley-divider {
+  display: none;
+}
+
+.main-content,
+.section:nth-of-type(odd) {
+  background: var(--ttl-cream);
+}
+
+.page-width {
+  width: min(100% - 84px, 1360px);
+}
+
+.announcement {
+  min-height: 52px;
+  display: grid;
+  align-items: center;
+  padding: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.announcement__inner {
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.site-header {
+  position: sticky;
+  background: var(--ttl-cream);
+  border-bottom: 1px solid #ede7dd;
+  backdrop-filter: none;
+}
+
+.site-header__inner {
+  min-height: 142px;
+  grid-template-columns: 1fr minmax(280px, auto) 1fr;
+}
+
+.site-header__nav {
+  align-self: end;
+  padding-bottom: 48px;
+  gap: 40px;
+}
+
+.site-header__nav a {
+  position: relative;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.site-header__nav a:first-child {
+  color: var(--ttl-gold);
+}
+
+.site-header__nav a:first-child::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: var(--ttl-gold);
+}
+
+.site-logo__text {
+  font-size: clamp(2.1rem, 3.1vw, 3.25rem);
+  letter-spacing: 0.02em;
+  line-height: 0.98;
+}
+
+.site-logo__text::first-line {
+  font-size: 0.58em;
+}
+
+.site-logo__tagline {
+  margin-top: 8px;
+  color: var(--ttl-brown);
+  font-size: clamp(1rem, 1.4vw, 1.35rem);
+}
+
+.site-logo::after {
+  display: none;
+}
+
+.site-header__actions {
+  align-self: end;
+  padding-bottom: 42px;
+  gap: 28px;
+}
+
+.icon-button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero {
+  min-height: min(680px, calc(100vh - 194px));
+  align-items: center;
+  border-bottom: 8px solid var(--ttl-cream);
+  background: #20160f;
+}
+
+.hero__media::after {
+  background: linear-gradient(90deg, rgba(24, 16, 10, 0.76), rgba(24, 16, 10, 0.22) 45%, rgba(24, 16, 10, 0.02) 78%);
+}
+
+.hero__content {
+  max-width: 520px;
+  padding-block: clamp(88px, 12vw, 154px);
+}
+
+.hero__content .eyebrow {
+  display: none;
+}
+
+.hero__content h1 {
+  font-size: clamp(3.2rem, 5.8vw, 5.85rem);
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.hero__content h1::after,
+.section-heading h2::after {
+  display: none;
+}
+
+.hero__content p {
+  max-width: 460px;
+  font-size: clamp(1.06rem, 1.35vw, 1.34rem);
+  line-height: 1.55;
+}
+
+.button,
+.shopify-payment-button__button {
+  min-height: 58px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--ttl-gold);
+  color: #fff;
+  padding: 16px 34px;
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.trust-bar {
+  background: var(--ttl-soft-cream);
+  border: 0;
+}
+
+.trust-bar.section--compact {
+  padding-block: 34px;
+}
+
+.trust-bar__grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px;
+}
+
+.trust-bar__item {
+  justify-content: start;
+  gap: 24px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.trust-bar__icon svg {
+  width: 44px;
+  height: 44px;
+  color: var(--ttl-brown);
+  stroke-width: 1.4;
+}
+
+.trust-bar__copy {
+  display: grid;
+  gap: 4px;
+}
+
+.trust-bar__copy strong {
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.trust-bar__copy small {
+  max-width: 190px;
+  color: var(--ttl-text);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.section {
+  padding-block: 46px 54px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.section-heading > div {
+  width: 100%;
+}
+
+.section-heading .eyebrow,
+.section-heading p {
+  display: none;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: var(--ttl-brown);
+  font-size: clamp(1.55rem, 2.2vw, 2.2rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.collection-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.collection-grid::before {
+  content: none;
+}
+
+.collection-card {
+  min-height: 340px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.collection-card img,
+.collection-card__placeholder {
+  min-height: 340px;
+  opacity: 1;
+}
+
+.collection-card::after {
+  background: linear-gradient(0deg, rgba(20, 13, 8, 0.68), rgba(20, 13, 8, 0.02) 56%);
+}
+
+.collection-card__content {
+  inset: auto 16px 26px;
+  text-align: center;
+}
+
+.collection-card h3 {
+  margin-bottom: 8px;
+  color: #fff;
+  font-size: clamp(1.2rem, 1.5vw, 1.65rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.collection-card__cta {
+  color: #fff;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+}
+
+.product-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  gap: 12px;
+}
+
+.product-card__media {
+  border-radius: 7px;
+  background: var(--ttl-soft-cream);
+  box-shadow: none;
+}
+
+.product-card__title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.price {
+  color: var(--ttl-text);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.product-card__wishlist {
+  top: auto;
+  right: 0;
+  bottom: -48px;
+  width: 26px;
+  height: 26px;
+  background: transparent;
+}
+
+@media (max-width: 990px) {
+  .page-width {
+    width: min(100% - 36px, 1360px);
+  }
+
+  .site-header__inner {
+    min-height: 88px;
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .site-header__actions,
+  .site-header__nav {
+    align-self: center;
+    padding-bottom: 0;
+  }
+
+  .site-logo__text {
+    font-size: 1.45rem;
+  }
+
+  .site-logo__tagline {
+    font-size: 0.88rem;
+  }
+
+  .trust-bar__grid {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .announcement {
+    min-height: auto;
+    padding-block: 10px;
+    font-size: 0.72rem;
+  }
+
+  .hero {
+    min-height: 620px;
+  }
+
+  .hero__content h1 {
+    font-size: 3rem;
+  }
+
+  .collection-grid,
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .collection-card,
+  .collection-card img,
+  .collection-card__placeholder {
+    min-height: 250px;
+  }
+
+  .trust-bar__grid {
+    grid-template-columns: 1fr;
+  }
+}

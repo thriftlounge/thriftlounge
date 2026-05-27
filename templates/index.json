@@ -11,10 +11,10 @@
     "trust_bar": {
       "type": "ttl-trust-bar",
       "blocks": {
-        "trust_1": { "type": "trust_item", "settings": { "icon": "sparkle", "title": "Curated Styles" } },
-        "trust_2": { "type": "trust_item", "settings": { "icon": "leaf", "title": "Sustainable Fashion" } },
-        "trust_3": { "type": "trust_item", "settings": { "icon": "quality", "title": "Quality Pieces" } },
-        "trust_4": { "type": "trust_item", "settings": { "icon": "bag", "title": "Easy Shopping" } }
+        "trust_1": { "type": "trust_item", "settings": { "icon": "dress", "title": "Curated Styles", "text": "Handpicked with love" } },
+        "trust_2": { "type": "trust_item", "settings": { "icon": "leaf", "title": "Sustainable Fashion", "text": "Good for you, better for the planet" } },
+        "trust_3": { "type": "trust_item", "settings": { "icon": "quality", "title": "Quality Pieces", "text": "Like new, always" } },
+        "trust_4": { "type": "trust_item", "settings": { "icon": "bag", "title": "Easy Shopping", "text": "Simple, secure, seamless" } }
       },
       "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
       "settings": {}

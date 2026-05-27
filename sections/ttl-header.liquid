@@ -18,7 +18,8 @@
     </nav>
 
     <a class="site-logo" href="{{ routes.root_url }}">
-      <span class="site-logo__text">{{ settings.logo_text | default: section.settings.logo_text }}</span>
+      {%- assign logo_text = settings.logo_text | default: section.settings.logo_text -%}
+      <span class="site-logo__text">{{ logo_text | replace: 'THE THRIFT', 'THE<br>THRIFT' }}</span>
       <span class="site-logo__tagline">{{ settings.tagline | default: section.settings.tagline }}</span>
     </a>
 

@@ -5,7 +5,12 @@
         <span class="trust-bar__icon">
           {% render 'ttl-icon', icon: block.settings.icon %}
         </span>
-        <span>{{ block.settings.title }}</span>
+        <span class="trust-bar__copy">
+          <strong>{{ block.settings.title }}</strong>
+          {%- if block.settings.text != blank -%}
+            <small>{{ block.settings.text }}</small>
+          {%- endif -%}
+        </span>
       </div>
     {%- endfor -%}
   </div>
@@ -24,14 +29,16 @@
           "id": "icon",
           "label": "Icon",
           "options": [
-            { "value": "sparkle", "label": "Curated" },
+            { "value": "dress", "label": "Curated" },
+            { "value": "sparkle", "label": "Sparkle" },
             { "value": "leaf", "label": "Sustainable" },
             { "value": "quality", "label": "Quality" },
             { "value": "bag", "label": "Shopping" }
           ],
-          "default": "sparkle"
+          "default": "dress"
         },
-        { "type": "text", "id": "title", "label": "Title", "default": "Curated Styles" }
+        { "type": "text", "id": "title", "label": "Title", "default": "Curated Styles" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Handpicked with love" }
       ]
     }
   ],
@@ -39,10 +46,10 @@
     {
       "name": "Trust bar",
       "blocks": [
-        { "type": "trust_item", "settings": { "icon": "sparkle", "title": "Curated Styles" } },
-        { "type": "trust_item", "settings": { "icon": "leaf", "title": "Sustainable Fashion" } },
-        { "type": "trust_item", "settings": { "icon": "quality", "title": "Quality Pieces" } },
-        { "type": "trust_item", "settings": { "icon": "bag", "title": "Easy Shopping" } }
+        { "type": "trust_item", "settings": { "icon": "dress", "title": "Curated Styles", "text": "Handpicked with love" } },
+        { "type": "trust_item", "settings": { "icon": "leaf", "title": "Sustainable Fashion", "text": "Good for you, better for the planet" } },
+        { "type": "trust_item", "settings": { "icon": "quality", "title": "Quality Pieces", "text": "Like new, always" } },
+        { "type": "trust_item", "settings": { "icon": "bag", "title": "Easy Shopping", "text": "Simple, secure, seamless" } }
       ]
     }
   ]
