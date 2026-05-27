@@ -13,28 +13,32 @@
     </div>
 
     <div class="collection-grid">
-      {%- for block in section.blocks -%}
-        {%- assign collection = block.settings.collection -%}
-        <a class="collection-card" href="{{ collection.url | default: routes.collections_url }}" {{ block.shopify_attributes }}>
-          {%- if collection.featured_image != blank -%}
-            {{
-              collection.featured_image
-              | image_url: width: 900
-              | image_tag:
-                loading: 'lazy',
-                sizes: '(min-width: 990px) 25vw, (min-width: 640px) 50vw, 100vw',
-                widths: '300, 500, 700, 900',
-                alt: collection.featured_image.alt
-            }}
-          {%- else -%}
-            {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
-          {%- endif -%}
-          <div class="collection-card__content">
-            <h3>{{ collection.title | default: block.settings.fallback_title }}</h3>
-            <span class="collection-card__cta">Shop Now</span>
-          </div>
-        </a>
-      {%- endfor -%}
+      {%- liquid
+        assign has_theme_categories = false
+        if settings.category_collection_1 != blank or settings.category_collection_2 != blank or settings.category_collection_3 != blank or settings.category_collection_4 != blank or settings.category_collection_5 != blank or settings.category_collection_6 != blank
+          assign has_theme_categories = true
+        endif
+      -%}
+
+      {%- if has_theme_categories -%}
+        {%- assign collection = settings.category_collection_1 -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- assign collection = settings.category_collection_2 -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- assign collection = settings.category_collection_3 -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- assign collection = settings.category_collection_4 -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- assign collection = settings.category_collection_5 -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+        {%- assign collection = settings.category_collection_6 -%}
+        {%- if collection != blank -%}{% render 'ttl-collection-card', collection: collection %}{%- endif -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- assign collection = block.settings.collection -%}
+          {% render 'ttl-collection-card', collection: collection, fallback_title: block.settings.fallback_title, block: block %}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 </section>

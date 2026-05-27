@@ -2,7 +2,7 @@
   <div class="announcement" role="region" aria-label="Announcement">
     <div class="page-width announcement__inner">
       <span>{{ section.settings.location_text }}</span>
-      <span>{{ section.settings.shipping_text }}</span>
+      <span>{{ settings.announcement_text | default: section.settings.shipping_text }}</span>
       <span class="announcement__social">
         {{ section.settings.follow_text }}
         {%- if settings.instagram_url != blank -%}
@@ -10,8 +10,15 @@
             {% render 'ttl-icon', icon: 'instagram' %}
           </a>
         {%- endif -%}
-        {%- if settings.whatsapp_url != blank -%}
-          <a href="{{ settings.whatsapp_url }}" aria-label="WhatsApp">
+        {%- liquid
+          assign whatsapp_href = settings.whatsapp_url
+          if settings.whatsapp_number != blank
+            assign clean_whatsapp_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
+            assign whatsapp_href = 'https://wa.me/' | append: clean_whatsapp_number
+          endif
+        -%}
+        {%- if whatsapp_href != blank -%}
+          <a href="{{ whatsapp_href }}" aria-label="WhatsApp">
             {% render 'ttl-icon', icon: 'whatsapp' %}
           </a>
         {%- endif -%}

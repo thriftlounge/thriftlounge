@@ -1,5 +1,5 @@
 {%- liquid
-  assign featured_collection = section.settings.collection
+  assign featured_collection = settings.new_arrivals_collection | default: section.settings.collection
   assign products_to_show = section.settings.products_to_show
 -%}
 

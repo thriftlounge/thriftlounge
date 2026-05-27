@@ -1,15 +1,16 @@
 <section class="hero">
   <div class="hero__media">
-    {%- if section.settings.image != blank -%}
+    {%- assign hero_image = settings.hero_image | default: section.settings.image -%}
+    {%- if hero_image != blank -%}
       {{
-        section.settings.image
+        hero_image
         | image_url: width: 2400
         | image_tag:
           loading: 'eager',
           fetchpriority: 'high',
           sizes: '100vw',
           widths: '900, 1200, 1600, 2000, 2400',
-          alt: section.settings.image.alt
+          alt: hero_image.alt
       }}
     {%- else -%}
       {{ 'lifestyle-1' | placeholder_svg_tag }}
@@ -21,13 +22,16 @@
       {%- if section.settings.eyebrow != blank -%}
         <p class="eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-      <h1>{{ section.settings.heading | newline_to_br }}</h1>
-      {%- if section.settings.text != blank -%}
-        <p>{{ section.settings.text }}</p>
+      <h1>{{ settings.hero_heading | default: section.settings.heading | newline_to_br }}</h1>
+      {%- assign hero_subheading = settings.hero_subheading | default: section.settings.text -%}
+      {%- if hero_subheading != blank -%}
+        <p>{{ hero_subheading }}</p>
       {%- endif -%}
       <div class="hero__actions">
-        {%- if section.settings.primary_label != blank -%}
-          <a class="button" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+        {%- assign hero_button_text = settings.hero_button_text | default: section.settings.primary_label -%}
+        {%- assign hero_button_link = settings.hero_button_link | default: section.settings.primary_link -%}
+        {%- if hero_button_text != blank -%}
+          <a class="button" href="{{ hero_button_link }}">{{ hero_button_text }}</a>
         {%- endif -%}
         {%- if section.settings.secondary_label != blank -%}
           <a class="button button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>

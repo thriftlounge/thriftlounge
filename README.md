@@ -41,6 +41,6 @@ Use Shopify inventory tracking for thrift stock so sold-out badges reflect actua
 - Add product metafields under the `custom` namespace:
   - `condition`
   - `measurements`
-  - `fabric_material`
+  - `fabric`
   - `styling_note`
 - Add Instagram and WhatsApp links in Theme settings > Social links.

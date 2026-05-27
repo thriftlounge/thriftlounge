@@ -1,0 +1,19 @@
+<a class="collection-card" href="{{ collection.url | default: routes.collections_url }}" {% if block != blank %}{{ block.shopify_attributes }}{% endif %}>
+  {%- if collection.featured_image != blank -%}
+    {{
+      collection.featured_image
+      | image_url: width: 900
+      | image_tag:
+        loading: 'lazy',
+        sizes: '(min-width: 990px) 25vw, (min-width: 640px) 50vw, 100vw',
+        widths: '300, 500, 700, 900',
+        alt: collection.featured_image.alt
+    }}
+  {%- else -%}
+    {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
+  {%- endif -%}
+  <div class="collection-card__content">
+    <h3>{{ collection.title | default: fallback_title | default: 'Collection' }}</h3>
+    <span class="collection-card__cta">Shop Now</span>
+  </div>
+</a>

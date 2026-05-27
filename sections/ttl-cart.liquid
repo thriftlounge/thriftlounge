@@ -29,8 +29,15 @@
           <p>{{ 'templates.cart.subtotal' | t }}: <strong>{{ cart.total_price | money }}</strong></p>
           <button class="button button--secondary" type="submit">{{ 'templates.cart.update' | t }}</button>
           <button class="button" type="submit" name="checkout">{{ 'templates.cart.checkout' | t }}</button>
-          {%- if settings.whatsapp_url != blank -%}
-            <a class="button button--secondary" href="{{ settings.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp Support</a>
+          {%- liquid
+            assign whatsapp_href = settings.whatsapp_url
+            if settings.whatsapp_number != blank
+              assign clean_whatsapp_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
+              assign whatsapp_href = 'https://wa.me/' | append: clean_whatsapp_number
+            endif
+          -%}
+          {%- if whatsapp_href != blank -%}
+            <a class="button button--secondary" href="{{ whatsapp_href }}" target="_blank" rel="noopener">WhatsApp Support</a>
           {%- endif -%}
         </div>
       </form>

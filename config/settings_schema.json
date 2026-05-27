@@ -12,6 +12,18 @@
     "name": "Brand",
     "settings": [
       {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo text",
+        "default": "THE THRIFT LOUNGE"
+      },
+      {
+        "type": "text",
+        "id": "tagline",
+        "label": "Tagline",
+        "default": "Curated finds. New stories."
+      },
+      {
         "type": "image_picker",
         "id": "logo",
         "label": "Logo"
@@ -37,6 +49,13 @@
     "name": "Social links",
     "settings": [
       {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp number",
+        "default": "919999999999",
+        "info": "Use country code and number only, for example 919999999999."
+      },
+      {
         "type": "url",
         "id": "instagram_url",
         "label": "Instagram URL"
@@ -44,7 +63,81 @@
       {
         "type": "url",
         "id": "whatsapp_url",
-        "label": "WhatsApp URL"
+        "label": "WhatsApp URL fallback"
+      }
+    ]
+  },
+  {
+    "name": "Homepage content",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Free shipping on orders above ₹1499"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Hero image"
+      },
+      {
+        "type": "textarea",
+        "id": "hero_heading",
+        "label": "Hero heading",
+        "default": "TIMELESS PIECES,\nYOUR STORY."
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subheading",
+        "label": "Hero subheading",
+        "default": "Handpicked styles that blend comfort, charm & effortless elegance."
+      },
+      {
+        "type": "text",
+        "id": "hero_button_text",
+        "label": "Hero button text",
+        "default": "Shop New Drops"
+      },
+      {
+        "type": "url",
+        "id": "hero_button_link",
+        "label": "Hero button link"
+      },
+      {
+        "type": "collection",
+        "id": "new_arrivals_collection",
+        "label": "New Arrivals collection selector"
+      },
+      {
+        "type": "collection",
+        "id": "category_collection_1",
+        "label": "Category collection selector 1"
+      },
+      {
+        "type": "collection",
+        "id": "category_collection_2",
+        "label": "Category collection selector 2"
+      },
+      {
+        "type": "collection",
+        "id": "category_collection_3",
+        "label": "Category collection selector 3"
+      },
+      {
+        "type": "collection",
+        "id": "category_collection_4",
+        "label": "Category collection selector 4"
+      },
+      {
+        "type": "collection",
+        "id": "category_collection_5",
+        "label": "Category collection selector 5"
+      },
+      {
+        "type": "collection",
+        "id": "category_collection_6",
+        "label": "Category collection selector 6"
       }
     ]
   }

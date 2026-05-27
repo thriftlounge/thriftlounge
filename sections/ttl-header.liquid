@@ -18,8 +18,8 @@
     </nav>
 
     <a class="site-logo" href="{{ routes.root_url }}">
-      <span class="site-logo__text">{{ section.settings.logo_text }}</span>
-      <span class="site-logo__tagline">{{ section.settings.tagline }}</span>
+      <span class="site-logo__text">{{ settings.logo_text | default: section.settings.logo_text }}</span>
+      <span class="site-logo__tagline">{{ settings.tagline | default: section.settings.tagline }}</span>
     </a>
 
     <div class="site-header__actions">
