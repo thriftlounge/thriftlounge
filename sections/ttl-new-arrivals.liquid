@@ -1,3 +1,7 @@
+{%- comment -%}
+  Dynamic New Arrivals section. Merchants select the collection in theme settings
+  or section settings; products are never hardcoded.
+{%- endcomment -%}
 {%- liquid
   assign featured_collection = settings.new_arrivals_collection | default: section.settings.collection
   assign products_to_show = section.settings.products_to_show

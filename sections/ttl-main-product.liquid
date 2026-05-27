@@ -1,3 +1,7 @@
+{%- comment -%}
+  Main product page. All product data, inventory state, variants, images, and
+  metafields are sourced dynamically from Shopify.
+{%- endcomment -%}
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign condition = product.metafields.custom.condition

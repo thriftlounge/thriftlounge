@@ -2,7 +2,7 @@
   assign selected_variant = product.selected_or_first_available_variant
   assign condition = product.metafields.custom.condition
   assign measurements = product.metafields.custom.measurements
-  assign fabric_material = product.metafields.custom.fabric_material
+  assign fabric = product.metafields.custom.fabric
   assign styling_note = product.metafields.custom.styling_note
 -%}
 
@@ -33,7 +33,7 @@
       <h1>{{ product.title }}</h1>
       {% render 'price', product: product %}
 
-      {%- unless selected_variant.available -%}
+      {%- unless product.available -%}
         <span class="badge product-status">{{ 'products.product.sold_out' | t }}</span>
       {%- endunless -%}
 
@@ -44,8 +44,8 @@
         {%- if measurements != blank -%}
           <p><strong>Measurements:</strong> {{ measurements | metafield_tag }}</p>
         {%- endif -%}
-        {%- if fabric_material != blank -%}
-          <p><strong>Fabric/Material:</strong> {{ fabric_material | metafield_tag }}</p>
+        {%- if fabric != blank -%}
+          <p><strong>Fabric:</strong> {{ fabric | metafield_tag }}</p>
         {%- endif -%}
         {%- if styling_note != blank -%}
           <p><strong>Styling Note:</strong> {{ styling_note | metafield_tag }}</p>
@@ -76,9 +76,9 @@
           <input id="Quantity-{{ section.id }}" class="field" type="number" name="quantity" value="1" min="1">
         </div>
 
-        <button class="button" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>
+        <button class="button" type="submit" name="add" {% unless product.available %}disabled{% endunless %}>
           <span data-submit-text>
-            {%- if selected_variant.available -%}
+            {%- if product.available -%}
               {{ 'products.product.add_to_cart' | t }}
             {%- else -%}
               {{ 'products.product.sold_out' | t }}
@@ -86,7 +86,9 @@
           </span>
         </button>
 
-        {{ form | payment_button }}
+        {%- if product.available -%}
+          {{ form | payment_button }}
+        {%- endif -%}
       {%- endform -%}
 
       {%- if settings.whatsapp_url != blank -%}
@@ -100,7 +102,7 @@
         <div class="product-accordion__content rte">
           {{ product.description }}
           {%- if condition != blank -%}<p><strong>Condition:</strong> {{ condition | metafield_tag }}</p>{%- endif -%}
-          {%- if fabric_material != blank -%}<p><strong>Fabric/Material:</strong> {{ fabric_material | metafield_tag }}</p>{%- endif -%}
+          {%- if fabric != blank -%}<p><strong>Fabric:</strong> {{ fabric | metafield_tag }}</p>{%- endif -%}
         </div>
       </details>
 
