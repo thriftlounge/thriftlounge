@@ -1,0 +1,35 @@
+<section class="section newsletter">
+  <div class="page-width newsletter__inner">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+
+    {%- form 'customer' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" value="{{ form.email }}" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="Email address" required>
+      <button class="button" type="submit">Join</button>
+      {%- if form.posted_successfully? -%}
+        <p>Thanks for joining.</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p>{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "First look access" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Know when the new rack lands." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Send drop notes, styling edits, and restock alerts through Shopify email capture." }
+  ],
+  "presets": [
+    { "name": "Newsletter" }
+  ]
+}
+{% endschema %}

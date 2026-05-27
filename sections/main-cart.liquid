@@ -1,0 +1,42 @@
+<section class="section">
+  <div class="page-width cart-page">
+    <h1>{{ 'templates.cart.title' | t }}</h1>
+
+    {%- if cart == empty -%}
+      <div class="empty-state">
+        <p>{{ 'templates.cart.empty' | t }}</p>
+        <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'general.shop_now' | t }}</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post">
+        {%- for item in cart.items -%}
+          <div class="cart-item">
+            <a href="{{ item.url }}">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 180', alt: item.image.alt }}
+              {%- endif -%}
+            </a>
+            <div>
+              <h2 class="product-card__title"><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+              <p>{{ item.variant.title }}</p>
+              <input class="field" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+            </div>
+            <div class="cart-item__price">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+
+        <div class="cart-summary">
+          <p>{{ 'templates.cart.subtotal' | t }}: <strong>{{ cart.total_price | money }}</strong></p>
+          <button class="button button--secondary" type="submit">{{ 'templates.cart.update' | t }}</button>
+          <button class="button" type="submit" name="checkout">{{ 'templates.cart.checkout' | t }}</button>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart"
+}
+{% endschema %}

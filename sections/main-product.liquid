@@ -1,0 +1,101 @@
+<section class="section">
+  <div class="page-width product-page">
+    <div class="product-gallery">
+      {%- if product.media.size > 0 -%}
+        {%- for media in product.media -%}
+          <div class="product-gallery__item">
+            {{
+              media.preview_image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 55vw, 100vw',
+                widths: '500, 800, 1100, 1400',
+                alt: media.alt
+            }}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="product-gallery__item">{{ 'product-1' | placeholder_svg_tag }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="product-info">
+      {%- if section.settings.show_vendor and product.vendor != blank -%}
+        <p class="eyebrow">{{ product.vendor }}</p>
+      {%- endif -%}
+      <h1>{{ product.title }}</h1>
+      {% render 'price', product: product %}
+
+      {%- form 'product', product, class: 'product-form' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          <variant-picker class="variant-picker">
+            {%- for option in product.options_with_values -%}
+              <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+              <select class="select" id="Option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                    {{ value }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            {%- endfor -%}
+            <script type="application/json">{{ product.variants | json }}</script>
+          </variant-picker>
+        {%- endunless -%}
+
+        <div class="quantity">
+          <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+          <input id="Quantity-{{ section.id }}" class="field" type="number" name="quantity" value="1" min="1">
+        </div>
+
+        <button class="button" type="submit" name="add" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          <span data-submit-text>
+            {%- if product.selected_or_first_available_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </span>
+        </button>
+
+        {{ form | payment_button }}
+      {%- endform -%}
+
+      {%- if product.description != blank -%}
+        <details class="product-accordion" data-accordion open>
+          <summary>Details</summary>
+          <div class="product-accordion__content rte">{{ product.description }}</div>
+        </details>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        <details class="product-accordion" data-accordion {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.heading }}</summary>
+          <div class="product-accordion__content rte">{{ block.settings.text }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Fit and condition" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Add sizing, fabric, care, or thrift condition guidance here.</p>" }
+      ]
+    }
+  ]
+}
+{% endschema %}

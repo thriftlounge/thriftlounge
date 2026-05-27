@@ -1,0 +1,64 @@
+<lounge-header class="site-header">
+  <div class="page-width site-header__inner">
+    <button class="icon-button menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="MobileNav" aria-label="{{ 'general.menu' | t }}">
+      {% render 'icon', icon: 'menu' %}
+    </button>
+
+    <nav class="site-header__nav" aria-label="Main menu">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <a class="site-logo" href="{{ routes.root_url }}" style="--logo-width: {{ settings.logo_width }}px">
+      {%- if settings.logo != blank -%}
+        {{
+          settings.logo
+          | image_url: width: settings.logo_width
+          | image_tag:
+            loading: 'eager',
+            widths: '100, 140, 180, 220, 260',
+            style: 'width: var(--logo-width); height: auto;',
+            alt: shop.name
+        }}
+      {%- else -%}
+        <span class="site-logo__text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <div class="site-header__actions">
+      <a class="icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
+        {% render 'icon', icon: 'search' %}
+      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {% render 'icon', icon: 'user' %}
+        </a>
+      {%- endif -%}
+      <a class="icon-button" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart' | t }}">
+        {% render 'icon', icon: 'cart' %}
+        <span class="visually-hidden">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav id="MobileNav" class="mobile-nav" data-mobile-nav hidden aria-label="Mobile menu">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+</lounge-header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

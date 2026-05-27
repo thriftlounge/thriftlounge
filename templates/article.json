@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Shop the mood",
+        "heading": "Pieces to pair with this story",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["main", "featured"]
+}

@@ -1,0 +1,43 @@
+<section class="section">
+  <div class="page-width">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">{{ blog.articles_count }} posts</p>
+        <h1>{{ blog.title }}</h1>
+      </div>
+    </div>
+
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+      <div class="blog-grid">
+        {%- for article in blog.articles -%}
+          <article class="article-card">
+            <a class="product-card__media" href="{{ article.url }}">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 100vw', widths: '360, 540, 720, 900', alt: article.image.alt }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+              {%- endif -%}
+            </a>
+            <div class="product-card__info">
+              <p class="eyebrow">{{ article.published_at | date: format: 'abbreviated_date' }}</p>
+              <h2 class="product-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              {%- if article.excerpt_or_content != blank -%}
+                <p>{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main blog",
+  "settings": [
+    { "type": "range", "id": "articles_per_page", "label": "Articles per page", "min": 3, "max": 24, "step": 3, "default": 9 }
+  ]
+}
+{% endschema %}

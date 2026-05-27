@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Catch the next drop before it sells."
+      }
+    }
+  },
+  "order": ["main", "newsletter"]
+}

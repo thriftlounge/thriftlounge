@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "The Thrift Lounge",
+        "text": "Curated women’s clothing with a warm boutique feel, refreshed with one-of-one finds from Shopify inventory.",
+        "primary_label": "Shop new arrivals",
+        "secondary_label": "Browse collections"
+      }
+    },
+    "collections": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_1": { "type": "featured_collection" },
+        "collection_2": { "type": "featured_collection" },
+        "collection_3": { "type": "featured_collection" },
+        "collection_4": { "type": "featured_collection" }
+      },
+      "block_order": ["collection_1", "collection_2", "collection_3", "collection_4"],
+      "settings": {}
+    },
+    "arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Fresh from the racks",
+        "products_to_show": 8
+      }
+    },
+    "story": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Secondhand style, selected with care."
+      }
+    },
+    "banner": {
+      "type": "image-banner",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "collections", "arrivals", "story", "banner", "newsletter"]
+}
