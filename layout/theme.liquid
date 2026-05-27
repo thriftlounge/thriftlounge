@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.color_background }}">
+    <meta name="theme-color" content="#fbfaf7">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -24,24 +24,6 @@
 
     {{ content_for_header }}
 
-    <style>
-      {{ settings.font_heading | font_face: font_display: 'swap' }}
-      {{ settings.font_body | font_face: font_display: 'swap' }}
-      :root {
-        --color-background: {{ settings.color_background }};
-        --color-surface: {{ settings.color_surface }};
-        --color-text: {{ settings.color_text }};
-        --color-muted: {{ settings.color_muted }};
-        --color-accent: {{ settings.color_accent }};
-        --color-accent-dark: {{ settings.color_accent_dark }};
-        --font-heading-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-        --font-heading-style: {{ settings.font_heading.style }};
-        --font-heading-weight: {{ settings.font_heading.weight }};
-        --font-body-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-        --font-body-style: {{ settings.font_body.style }};
-        --font-body-weight: {{ settings.font_body.weight }};
-      }
-    </style>
     {{ 'ttl-theme.css' | asset_url | stylesheet_tag }}
     <script>
       window.themeStrings = {
