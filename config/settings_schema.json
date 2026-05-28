@@ -64,6 +64,18 @@
         "type": "url",
         "id": "whatsapp_url",
         "label": "WhatsApp URL fallback"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact email",
+        "default": "hello@thethriftlounge.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Contact phone",
+        "default": "+91 99999 99999"
       }
     ]
   },
