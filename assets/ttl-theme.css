@@ -884,6 +884,37 @@ p {
   padding-block: 48px 28px;
 }
 
+.footer-support {
+  background: #f4f0ea;
+  border-top: 1px solid var(--ttl-border);
+  border-bottom: 1px solid var(--ttl-border);
+  padding-block: 22px;
+}
+
+.footer-support__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.footer-support__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ttl-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.footer-support__item span {
+  display: block;
+  color: var(--ttl-warm-brown);
+  font-size: 0.82rem;
+  font-weight: 400;
+  text-transform: none;
+}
+
 .site-footer__inner {
   display: grid;
   grid-template-columns: minmax(220px, 1.2fr) repeat(auto-fit, minmax(170px, 1fr));
@@ -915,7 +946,14 @@ p {
 .footer-social a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  min-height: 38px;
+  border: 1px solid rgba(176, 138, 85, 0.62);
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: var(--ttl-cream);
+  background: rgba(176, 138, 85, 0.14);
 }
 
 .site-footer form {
@@ -1259,6 +1297,7 @@ body::before,
 }
 
 .collection-card {
+  container-type: inline-size;
   min-height: 340px;
   border-radius: 8px;
   box-shadow: none;
@@ -1275,19 +1314,22 @@ body::before,
 }
 
 .collection-card__content {
-  inset: auto 16px 26px;
+  inset: auto 10px 26px;
   text-align: center;
-  width: calc(100% - 32px);
+  width: calc(100% - 20px);
 }
 
 .collection-card h3 {
   margin-bottom: 8px;
   color: #fff;
-  font-size: clamp(1.05rem, 1.45vw, 1.5rem);
-  line-height: 1.08;
+  font-size: clamp(0.8rem, 9.5cqw, 1.45rem);
+  line-height: 1;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  overflow-wrap: normal;
+  hyphens: manual;
 }
 
 .collection-card__cta {
@@ -1359,6 +1401,10 @@ body::before,
   .trust-bar__grid {
     gap: 24px;
   }
+
+  .footer-support__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
@@ -1388,10 +1434,14 @@ body::before,
   }
 
   .collection-card h3 {
-    font-size: clamp(0.95rem, 6vw, 1.35rem);
+    font-size: clamp(0.78rem, 9.5cqw, 1.12rem);
   }
 
   .trust-bar__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-support__grid {
     grid-template-columns: 1fr;
   }
 }
