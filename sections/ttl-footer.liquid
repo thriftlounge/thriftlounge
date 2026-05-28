@@ -4,17 +4,6 @@
     assign clean_whatsapp_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
     assign whatsapp_href = 'https://wa.me/' | append: clean_whatsapp_number
   endif
-
-  assign email_href = blank
-  if settings.contact_email != blank
-    assign email_href = 'mailto:' | append: settings.contact_email
-  endif
-
-  assign phone_href = blank
-  if settings.contact_phone != blank
-    assign clean_phone = settings.contact_phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
-    assign phone_href = 'tel:' | append: clean_phone
-  endif
 -%}
 
 <section class="footer-support" aria-label="Store support">
@@ -38,31 +27,7 @@
   </div>
 </section>
 
-<footer class="site-footer site-footer--compact">
-  <div class="page-width site-footer__compact">
-    <p class="site-footer__brand">{{ section.settings.heading | default: shop.name }}</p>
-    {%- if section.settings.text != blank -%}
-      <p>{{ section.settings.text }}</p>
-    {%- endif -%}
-  </div>
-</footer>
-
 <div class="floating-contact" aria-label="Contact The Thrift Lounge">
-  {%- if settings.instagram_url != blank -%}
-    <a class="floating-contact__item" href="{{ settings.instagram_url }}" aria-label="Instagram" title="Instagram">
-      {% render 'ttl-icon', icon: 'instagram' %}
-    </a>
-  {%- endif -%}
-  {%- if email_href != blank -%}
-    <a class="floating-contact__item" href="{{ email_href }}" aria-label="Email" title="Email">
-      {% render 'ttl-icon', icon: 'email' %}
-    </a>
-  {%- endif -%}
-  {%- if phone_href != blank -%}
-    <a class="floating-contact__item" href="{{ phone_href }}" aria-label="Phone" title="Phone">
-      {% render 'ttl-icon', icon: 'phone' %}
-    </a>
-  {%- endif -%}
   {%- if whatsapp_href != blank -%}
     <a class="floating-contact__item floating-contact__item--whatsapp" href="{{ whatsapp_href }}" aria-label="WhatsApp" title="WhatsApp">
       {% render 'ttl-icon', icon: 'whatsapp' %}
@@ -74,18 +39,6 @@
 {
   "name": "Compact footer",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "The Thrift Lounge"
-    },
-    {
-      "type": "textarea",
-      "id": "text",
-      "label": "Text",
-      "default": "Curated thrift, vintage, and pre-loved style."
-    },
     {
       "type": "text",
       "id": "cod_heading",
