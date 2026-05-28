@@ -520,6 +520,11 @@ p {
   box-shadow: var(--shadow);
 }
 
+.collection-card--reframe {
+  background:
+    linear-gradient(180deg, #9b8166, #2d1f17 68%);
+}
+
 .collection-card::after {
   content: "";
   position: absolute;
@@ -536,6 +541,13 @@ p {
   min-height: 260px;
   object-fit: cover;
   opacity: 0.82;
+}
+
+.collection-card .collection-card__image--reframe {
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(0.9);
+  transform-origin: center bottom;
 }
 
 .collection-card__content {
