@@ -499,6 +499,10 @@ p {
   gap: clamp(14px, 2vw, 24px);
 }
 
+.product-grid__empty {
+  grid-column: 1 / -1;
+}
+
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
